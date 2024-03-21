@@ -1,0 +1,40 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: coreai-mcu-responses
+  
+  description: Node API / queue message handler that manages MCU LLM responses
+  
+  annotations:
+    github.com/project-slug: defra/coreai-mcu-responses
+    dev.azure.com/project: DEFRA-AI
+    dev.azure.com/build-definition: coreai-mcu-responses
+    sonarqube.org/project-key: coreai-mcu-responses
+    grafana/dashboard-selector: "folderTitle == 'Managed Prometheus'"
+    backstage.io/kubernetes-id: coreai-mcu-responses
+  links:
+    - url: https://github.com/defra/coreai-mcu-responses
+      title: GitHub Repository
+      icon: github
+    - url: https://dev.azure.com/defragovuk/DEFRA-AI/
+      title: Azure DevOps Project
+      icon: project
+    - url: https://sonarcloud.io/project/overview?id=coreai-mcu-responses
+      title: SonarCloud Analysis
+      icon: check
+    - url: https://snyk.io/test/github/DEFRA/coreai-mcu-responses
+      title: Snyk Analysis
+      icon: policy
+    - url: https://portal.azure.com/defradev.onmicrosoft.com
+      title: Azure Portal - Defra Dev
+      icon: cloud
+    - url: https://portal.azure.com/Defra.onmicrosoft.com
+      title: Azure Portal - Defra
+      icon: cloud
+spec:
+  type: backend
+  lifecycle: alpha
+  owner: "group:default/mcu-ai"
+  
+  system: system:default/core-mcu-ai-system
+  

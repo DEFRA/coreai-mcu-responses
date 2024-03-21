@@ -1,0 +1,19 @@
+services:
+  coreai-mcu-responses:
+    build:
+      context: .
+      target: production
+    image: coreai-mcu-responses
+    container_name: coreai-mcu-responses
+    depends_on:
+      - coreai-mcu-responses-postgres
+    environment:
+      APPINSIGHTS_CLOUDROLE: coreai-mcu-responses-local
+      APPINSIGHTS_CONNECTIONSTRING: ${APPINSIGHTS_CONNECTIONSTRING}
+
+  coreai-mcu-responses-postgres:
+    image: postgres:11.4-alpine
+    environment:
+      POSTGRES_DB: coreai-mcu-responses
+      POSTGRES_PASSWORD: ppp
+      POSTGRES_USERNAME: postgres

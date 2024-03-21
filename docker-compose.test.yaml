@@ -1,0 +1,16 @@
+# This override file should be used when running automated tests so
+# that test output is saved to the host
+
+services:
+  coreai-mcu-responses:
+    build:
+      target: development
+    image: coreai-mcu-responses-development
+    container_name: coreai-mcu-responses-test
+    command: npm run test
+    volumes:
+      - ./app:/home/node/app
+      - ./test:/home/node/test
+      - ./test-output:/home/node/test-output
+      - ./jest.config.js:/home/node/jest.config.js
+      - ./package.json:/home/node/package.json

@@ -1,0 +1,2 @@
+{{- define "coreai-mcu-responses.container" -}}
+{{- end -}}
