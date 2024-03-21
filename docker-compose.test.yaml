@@ -14,3 +14,13 @@ services:
       - ./test-output:/home/node/test-output
       - ./jest.config.js:/home/node/jest.config.js
       - ./package.json:/home/node/package.json
+    depends_on:
+      - coreai-mcu-responses-azurite
+    environment:
+      MESSAGE_QUEUE_HOST: ${MESSAGE_QUEUE_HOST}
+      MESSAGE_QUEUE_PASSWORD: ${MESSAGE_QUEUE_USER}
+      MESSAGE_QUEUE_USER: ${MESSAGE_QUEUE_PASSWORD}
+      RESPONSE_PROCESSING_QUEUE_ADDRESS: ${RESPONSE_PROCESSING_QUEUE_ADDRESS:-coreai-mcu-generation-response}${MESSAGE_QUEUE_SUFFIX}
+
+  coreai-mcu-responses-azurite:
+    image: mcr.microsoft.com/azure-storage/azurite
