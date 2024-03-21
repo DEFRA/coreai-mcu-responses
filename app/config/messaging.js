@@ -9,7 +9,7 @@ const sharedConfigSchema = {
 }
 
 const schema = Joi.object({
-  certificateRequestQueue: {
+  responseProcessingQueue: {
     address: Joi.string(),
     type: Joi.string(),
     ...sharedConfigSchema
