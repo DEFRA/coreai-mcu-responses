@@ -1,11 +1,12 @@
 describe('response message process tests', () => {
   jest.mock('../../../../../app/messaging/inbound/responses/response-schema')
+  jest.mock('../../../../../app/storage/response-repo')
 
   const { validateResponseMessage } = require('../../../../../app/messaging/inbound/responses/response-schema')
 
   const { processResponse } = require('../../../../../app/messaging/inbound/responses/process-response')
 
-  test('valid message should complete message', () => {
+  test('valid message should complete message', async () => {
     const message = {
       body: {
         body: {
@@ -27,7 +28,7 @@ describe('response message process tests', () => {
 
     validateResponseMessage.mockReturnValue(message.body)
 
-    processResponse(message, receiver)
+    await processResponse(message, receiver)
 
     expect(receiver.completeMessage).toHaveBeenCalled()
   })
