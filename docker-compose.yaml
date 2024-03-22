@@ -10,6 +10,8 @@ services:
     environment:
       APPINSIGHTS_CLOUDROLE: coreai-mcu-responses-local
       APPINSIGHTS_CONNECTIONSTRING: ${APPINSIGHTS_CONNECTIONSTRING}
+      RESPONSE_PROCESSING_QUEUE_ADDRESS: ${RESPONSE_PROCESSING_QUEUE_ADDRESS:-coreai-mcu-generation-response}
+      AZURE_STORAGE_ACCOUNT: ${AZURE_STORAGE_ACCOUNT}
   
   coreai-mcu-responses-azurite:
     image: mcr.microsoft.com/azure-storage/azurite
