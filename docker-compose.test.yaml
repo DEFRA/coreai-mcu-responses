@@ -21,6 +21,9 @@ services:
       MESSAGE_QUEUE_USER: ${MESSAGE_QUEUE_USER}
       MESSAGE_QUEUE_PASSWORD: ${MESSAGE_QUEUE_PASSWORD}
       RESPONSE_PROCESSING_QUEUE_ADDRESS: ${RESPONSE_PROCESSING_QUEUE_ADDRESS:-coreai-mcu-generation-response}${MESSAGE_QUEUE_SUFFIX}
+      AZURE_STORAGE_USE_CONNECTION_STRING: ${AZURE_STORAGE_USE_CONNECTION_STRING:-true}
+      AZURE_STORAGE_CONNECTION_STRING: ${AZURE_STORAGE_CONNECTION_STRING:-DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;TableEndpoint=http://host.docker.internal:10002/devstoreaccount1;}
+      AZURE_STORAGE_ACCOUNT: ${AZURE_STORAGE_ACCOUNT:-devstoreaccount1}
 
   coreai-mcu-responses-azurite:
     image: mcr.microsoft.com/azure-storage/azurite
