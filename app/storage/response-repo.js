@@ -10,12 +10,16 @@ const invertTimestamp = (timestamp) => {
   return inverted.padStart(19, '0')
 }
 
-const enrichResponse = (response) => {
-  
-}
+const enrichResponse = (response) => ({
+  ...response,
+  PartitionKey: response.document_id,
+  RowKey: invertTimestamp(Date.now()),
+  citations: JSON.stringify(response.citations)
+})
 
 const addResponse = async (response) => {
-
+  const enrich = enrichResponse(response)
+  await tableClient.createEntity(enrich)
 }
 
 module.exports = {

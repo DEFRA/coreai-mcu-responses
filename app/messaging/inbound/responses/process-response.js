@@ -12,7 +12,7 @@ const processResponse = async (message, receiver) => {
 
     await receiver.completeMessage(message)
   } catch (err) {
-    console.error(`Error processing response: ${err.message}`)
+    console.error(`Error processing response: ${err}`)
 
     await receiver.deadLetterMessage(message)
   }
