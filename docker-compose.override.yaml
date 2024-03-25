@@ -8,20 +8,31 @@ services:
       target: development
     image: coreai-mcu-responses-development
     container_name: coreai-mcu-responses-development
+    depends_on:
+      - coreai-mcu-responses-azurite
     ports:
-      - "3000:3000"
-      - "9229:9229"
+      - "${CORE_AI_RESPONSES_PORT:-3000}:3000"
+      - "${CORE_AI_RESPONSES_DEBUG_PORT:-9229}:9229"
     volumes:
       - ./app:/home/node/app
       - ./test:/home/node/test
       - ./scripts:/home/node/scripts
       - ./package.json:/home/node/package.json
+    environment:
+      MESSAGE_QUEUE_HOST: ${MESSAGE_QUEUE_HOST}
+      MESSAGE_QUEUE_USER: ${MESSAGE_QUEUE_USER}
+      MESSAGE_QUEUE_PASSWORD: ${MESSAGE_QUEUE_PASSWORD}
+      RESPONSE_PROCESSING_QUEUE_ADDRESS: ${RESPONSE_PROCESSING_QUEUE_ADDRESS:-coreai-mcu-generation-response}${MESSAGE_QUEUE_SUFFIX}
+      AZURE_STORAGE_USE_CONNECTION_STRING: ${AZURE_STORAGE_USE_CONNECTION_STRING:-true}
+      AZURE_STORAGE_CONNECTION_STRING: ${AZURE_STORAGE_CONNECTION_STRING:-DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;TableEndpoint=http://host.docker.internal:10002/devstoreaccount1;}
+      AZURE_STORAGE_ACCOUNT: ${AZURE_STORAGE_ACCOUNT:-devstoreaccount1}
   
-  coreai-mcu-responses-postgres:
+  coreai-mcu-responses-azurite:
+    image: mcr.microsoft.com/azure-storage/azurite
     ports:
-      - "5432:5432"
+      - "${CORE_AI_RESPONSES_TABLE_PORT:-10002}:10002"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - azurite_data:/data
 
 volumes:
-  postgres_data:
+  azurite_data:
