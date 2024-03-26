@@ -30,7 +30,6 @@ const getResponses = async (docId) => {
       filter: odata`PartitionKey eq ${docId}`
     }
   })
-  console.log(query)
 
   const responses = []
 
