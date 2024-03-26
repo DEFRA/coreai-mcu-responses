@@ -1,3 +1,5 @@
+const { odata } = require('@azure/data-tables')
+
 const { getTableClient } = require('./get-table-client')
 const tableConfig = require('../config/storage')
 
@@ -22,6 +24,23 @@ const addResponse = async (response) => {
   await tableClient.createEntity(enrich)
 }
 
+const getResponses = async (docId) => {
+  const query = tableClient.listEntities({
+    queryOptions: {
+      filter: odata`PartitionKey eq ${docId}`
+    }
+  })
+
+  const responses = []
+
+  for await (const entity of query) {
+    responses.push(entity)
+  }
+
+  return responses
+}
+
 module.exports = {
-  addResponse
+  addResponse,
+  getResponses
 }
