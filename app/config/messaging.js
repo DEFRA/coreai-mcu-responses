@@ -10,8 +10,13 @@ const sharedConfigSchema = {
 
 const schema = Joi.object({
   responseProcessingQueue: {
-    address: Joi.string(),
-    type: Joi.string(),
+    address: Joi.string().required(),
+    type: Joi.string().required(),
+    ...sharedConfigSchema
+  },
+  eventTopic: {
+    address: Joi.string().required(),
+    type: Joi.string().required(),
     ...sharedConfigSchema
   }
 })
@@ -28,6 +33,11 @@ const config = {
   responseProcessingQueue: {
     address: process.env.RESPONSE_PROCESSING_QUEUE_ADDRESS,
     type: 'queue',
+    ...sharedConfig
+  },
+  eventTopic: {
+    address: process.env.EVENT_TOPIC_ADDRESS,
+    type: 'topic',
     ...sharedConfig
   }
 }

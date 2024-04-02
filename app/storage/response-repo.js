@@ -21,6 +21,7 @@ const enrichResponse = (response) => ({
 
 const addResponse = async (response) => {
   const enrich = enrichResponse(response)
+
   await tableClient.createEntity(enrich)
 }
 

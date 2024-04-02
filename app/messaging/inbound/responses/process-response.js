@@ -1,6 +1,7 @@
 const util = require('util')
 const { validateResponseMessage } = require('../responses/response-schema')
 const { addResponse } = require('../../../storage/response-repo')
+const { publishResponseEvent } = require('../../outbound/publish-event')
 
 const processResponse = async (message, receiver) => {
   try {
@@ -9,6 +10,7 @@ const processResponse = async (message, receiver) => {
     console.log(`Processing response: ${util.inspect(body)}`)
 
     await addResponse(body)
+    await publishResponseEvent(body)
 
     await receiver.completeMessage(message)
   } catch (err) {
