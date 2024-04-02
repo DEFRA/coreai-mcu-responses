@@ -13,11 +13,12 @@ const createMessage = (data) => ({
     datacontenttype: 'application/json',
     subject: 'response',
     data: {
-      response: data
+      document_id: data.document_id,
+      response: data.response
     }
   },
   type: RESPONSE_PUBLISHED,
-  source: 'coreai-mcu-frontend'
+  source: 'coreai-mcu-responses'
 })
 
 const publishResponseEvent = async (data) => {
