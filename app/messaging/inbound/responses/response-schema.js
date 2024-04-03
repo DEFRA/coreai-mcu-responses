@@ -1,16 +1,12 @@
 const Joi = require('joi')
 
 const schema = Joi.object({
-  body: Joi.object({
-    document_id: Joi.string().uuid().required(),
-    llm: Joi.string().required(),
-    user_prompt: Joi.string().required(),
-    citations: Joi.array().items(Joi.string()).required(),
-    response: Joi.string().required()
-  }).required(),
-  source: Joi.string().required(),
-  type: Joi.string().required()
-})
+  document_id: Joi.string().uuid().required(),
+  llm: Joi.string().required(),
+  user_prompt: Joi.string().allow('').required(),
+  citations: Joi.array().required(),
+  response: Joi.string().required()
+}).required()
 
 const validateResponseMessage = (request) => {
   const { value, error } = schema.validate(request)
