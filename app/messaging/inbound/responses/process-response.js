@@ -5,7 +5,7 @@ const { publishResponseEvent } = require('../../outbound/publish-event')
 
 const processResponse = async (message, receiver) => {
   try {
-    const { body } = validateResponseMessage(message.body)
+    const body = validateResponseMessage(message.body)
 
     console.log(`Processing response: ${util.inspect(body)}`)
 

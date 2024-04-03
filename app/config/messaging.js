@@ -36,7 +36,7 @@ const config = {
     ...sharedConfig
   },
   eventTopic: {
-    address: process.env.EVENT_TOPIC_ADDRESS,
+    address: process.env.EVENTS_TOPIC_ADDRESS,
     type: 'topic',
     ...sharedConfig
   }
