@@ -12,11 +12,38 @@ const invertTimestamp = (timestamp) => {
   return inverted.padStart(19, '0')
 }
 
+const groupCitations = (citations) => {
+  return citations.reduce((acc, citation) => {
+    const { pageContent } = citation
+    const { blobMetadata, loc } = citation.metadata
+
+    const group = acc.find(group => group.title === blobMetadata.title)
+
+    if (!group) {
+      acc.push({
+        ...blobMetadata,
+        content: [{ pageContent, loc }]
+      })
+
+      return acc
+    }
+
+    group.content.push({ pageContent, loc })
+
+    return acc
+  }, [])
+}
+
 const enrichResponse = (response) => ({
   ...response,
   PartitionKey: response.document_id,
   RowKey: invertTimestamp(Date.now()),
-  citations: JSON.stringify(response.citations)
+  citations: JSON.stringify(groupCitations(response.citations))
+})
+
+const formatResponse = (response) => ({
+  ...response,
+  citations: JSON.parse(response.citations)
 })
 
 const addResponse = async (response) => {
@@ -35,7 +62,7 @@ const getResponses = async (docId) => {
   const responses = []
 
   for await (const entity of query) {
-    responses.push(entity)
+    responses.push(formatResponse(entity))
   }
 
   return responses
