@@ -6,6 +6,10 @@ const tableConfig = require('../config/storage')
 const tableClient = getTableClient(tableConfig.responseTable)
 const maxDate = new Date(8640000000000000)
 
+const initialiseTables = async () => {
+  await tableClient.createTable()
+}
+
 const invertTimestamp = (timestamp) => {
   const inverted = `${maxDate - timestamp}`
 
@@ -70,5 +74,6 @@ const getResponses = async (docId) => {
 
 module.exports = {
   addResponse,
-  getResponses
+  getResponses,
+  initialiseTables
 }
