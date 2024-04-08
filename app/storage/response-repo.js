@@ -3,6 +3,7 @@ const { odata } = require('@azure/data-tables')
 const { groupCitations } = require('../lib/citation-grouping')
 const { getTableClient } = require('./get-table-client')
 const tableConfig = require('../config/storage')
+const { mapSummaryToBase } = require('../mappers/document-summary')
 
 const tableClient = getTableClient(tableConfig.responseTable)
 const maxDate = new Date(8640000000000000)
@@ -28,7 +29,7 @@ const enrichResponse = (response) => ({
 const formatResponse = (response) => ({
   ...response,
   citations: groupCitations(JSON.parse(response.citations)),
-  document_summary: JSON.parse(response.document_summary)
+  document_summary: mapSummaryToBase(JSON.parse(response.document_summary))
 })
 
 const addResponse = async (response) => {
