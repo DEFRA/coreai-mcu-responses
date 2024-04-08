@@ -10,8 +10,8 @@ const schema = Joi.object({
     author: Joi.string().required(),
     title: Joi.string().required(),
     summary: Joi.string().required(),
-    key_points: Joi.string().required(),
-    key_facts: Joi.string().required(),
+    key_points: Joi.array().items(Joi.string()).required(),
+    key_facts: Joi.array().items(Joi.string()).required().required(),
     sentiment: Joi.string().required(),
     category: Joi.string().required()
   }
