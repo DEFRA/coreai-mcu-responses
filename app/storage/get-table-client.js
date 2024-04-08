@@ -16,6 +16,12 @@ const getTableClient = (tableName) => {
   return tableClient
 }
 
+const initialiseTables = async () => {
+  const tableClient = getTableClient(tableConfig.responseTable)
+  await tableClient.createTable()
+}
+
 module.exports = {
-  getTableClient
+  getTableClient,
+  initialiseTables
 }
