@@ -21,12 +21,14 @@ const enrichResponse = (response) => ({
   ...response,
   PartitionKey: response.document_id,
   RowKey: invertTimestamp(Date.now()),
-  citations: JSON.stringify(response.citations)
+  citations: JSON.stringify(response.citations),
+  document_summary: JSON.stringify(response.document_summary)
 })
 
 const formatResponse = (response) => ({
   ...response,
-  citations: groupCitations(JSON.parse(response.citations))
+  citations: groupCitations(JSON.parse(response.citations)),
+  document_summary: JSON.parse(response.document_summary)
 })
 
 const addResponse = async (response) => {
