@@ -5,16 +5,7 @@ const schema = Joi.object({
   llm: Joi.string().required(),
   user_prompt: Joi.string().allow('').required(),
   citations: Joi.array().required(),
-  response: Joi.string().required(),
-  document_summary: {
-    author: Joi.string().required(),
-    title: Joi.string().required(),
-    summary: Joi.string().required(),
-    key_points: Joi.array().items(Joi.string()).required(),
-    key_facts: Joi.array().items(Joi.string()).required().required(),
-    sentiment: Joi.string().required(),
-    category: Joi.string().required()
-  }
+  response: Joi.string().required()
 }).required()
 
 const validateResponseMessage = (request) => {
