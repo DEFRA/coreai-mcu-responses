@@ -1,5 +1,5 @@
 const Joi = require('joi')
-const { addResponse, getResponses, deleteResponses } = require('../storage/response-repo')
+const { getResponses, saveResponseBlob, updateResponseMetadata, deleteResponses  } = require('../storage/response-repo')
 
 module.exports = [{
   method: 'POST',
@@ -58,6 +58,48 @@ module.exports = [{
     }
 
     return h.response(responses).code(200)
+  }
+},
+{
+  method: 'POST',
+  path: '/responses/finalise',
+  handler: async (request, h) => {
+    const responses = await getResponses(request.payload.document_id)
+    const latestResponseBuffer = Buffer.from(responses[0].response)
+
+    const responseStorageOptions = {
+      latestResponseBuffer,
+      projectName: request.payload.project_name,
+      documentId: request.payload.document_id
+    }
+
+    try {
+      const savedLatestResponseBuffer = await saveResponseBlob(responseStorageOptions)
+      return h.response(savedLatestResponseBuffer).code(201)
+    } catch (err) {
+      return h.response({ error: err.message }).code(500)
+    }
+  }
+},
+{
+  method: 'PUT',
+  path: '/responses/finalise/{projectName}/{documentId}',
+  handler: async (request, h) => {
+    const updateResponseMetadataOptions = {
+      projectName: request.params.projectName,
+      documentId: request.params.documentId
+    }
+
+    try {
+      const status = await updateResponseMetadata(updateResponseMetadataOptions)
+      return h.response(status).code(200)
+    } catch (err) {
+      if (err.code === 'NotFound') {
+        return h.response().code(404).takeover()
+      }
+
+      throw err
+    }
   }
 },
 {
