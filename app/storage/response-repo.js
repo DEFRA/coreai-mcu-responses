@@ -2,14 +2,19 @@ const { odata } = require('@azure/data-tables')
 
 const { groupCitations } = require('../lib/citation-grouping')
 const { getTableClient } = require('./get-table-client')
-const config = require('../config/storage')
+const { blobServiceClient } = require('./blob-service-client')
 
+const config = require('../config/storage')
 const responsesContainerClient = blobServiceClient.getContainerClient(config.responsesContainer)
 const tableClient = getTableClient(config.responseTable)
 const maxDate = new Date(8640000000000000)
 
 const initialiseTables = async () => {
   await tableClient.createTable()
+}
+
+const initialiseContainer = async () => {
+  await responsesContainerClient.createIfNotExists()
 }
 
 const invertTimestamp = (timestamp) => {

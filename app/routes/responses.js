@@ -1,5 +1,9 @@
 const Joi = require('joi')
+<<<<<<< HEAD
 const { getResponses, saveResponseBlob, updateResponseMetadata, deleteResponses  } = require('../storage/response-repo')
+=======
+const { getResponses, saveResponseBlob, updateResponseMetadata } = require('../storage/response-repo')
+>>>>>>> faeb63d (Refactor)
 
 module.exports = [{
   method: 'POST',
