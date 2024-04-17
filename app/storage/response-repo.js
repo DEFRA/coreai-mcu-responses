@@ -51,8 +51,21 @@ const getResponses = async (docId) => {
   return responses
 }
 
+const deleteResponses = async (docId) => {
+  const query = tableClient.listEntities({
+    queryOptions: {
+      filter: odata`PartitionKey eq ${docId}`
+    }
+  })
+
+  for await (const entity of query) {
+    tableClient.deleteEntity(entity.partitionKey, entity.rowKey)
+  }
+}
+
 module.exports = {
   addResponse,
   getResponses,
+  deleteResponses,
   initialiseTables
 }
