@@ -35,7 +35,7 @@ module.exports = [{
       data
     )
 
-    return h.response().code(200)
+    return h.response().code(201)
   }
 },
 {
