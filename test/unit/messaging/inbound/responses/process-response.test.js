@@ -1,6 +1,7 @@
 describe('response message process tests', () => {
   jest.mock('../../../../../app/messaging/inbound/responses/response-schema')
   jest.mock('../../../../../app/storage/response-repo')
+  jest.mock('../../../../../app/messaging/outbound/publish-event')
 
   const { validateResponseMessage } = require('../../../../../app/messaging/inbound/responses/response-schema')
 

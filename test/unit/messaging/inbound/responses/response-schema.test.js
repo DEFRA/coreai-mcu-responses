@@ -4,16 +4,14 @@ describe('response message schema tests', () => {
   test('valid message should return message body', () => {
     const message = {
       body: {
-        body: {
-          document_id: '123e4567-e89b-12d3-a456-426614174000',
-          llm: 'test',
-          user_prompt: 'test',
-          citations: ['test'],
-          response: 'test'
-        },
-        source: 'test',
-        type: 'test'
-      }
+        document_id: '123e4567-e89b-12d3-a456-426614174000',
+        llm: 'test',
+        user_prompt: 'test',
+        citations: ['test'],
+        response: 'test'
+      },
+      source: 'test',
+      type: 'test'
     }
 
     const value = validateResponseMessage(message.body)
