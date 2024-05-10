@@ -1,3 +1,11 @@
+storageAccounts:
+  - name: 'coreaimcu'
+    owner: 'no'
+    tables: 
+      - name: 'responses'
+        roleAssignments:
+          - roleName: 'TableDataContributor'
+
 namespaceTopics:
   - name: events
     owner: 'no'

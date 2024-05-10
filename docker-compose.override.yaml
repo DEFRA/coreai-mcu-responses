@@ -19,7 +19,6 @@ services:
       - ./scripts:/home/node/scripts
       - ./package.json:/home/node/package.json
     environment:
-      MESSAGE_QUEUE_HOST: ${MESSAGE_QUEUE_HOST}
       MESSAGE_QUEUE_USER: ${MESSAGE_QUEUE_USER}
       MESSAGE_QUEUE_PASSWORD: ${MESSAGE_QUEUE_PASSWORD}
       RESPONSE_PROCESSING_QUEUE_ADDRESS: ${RESPONSE_PROCESSING_QUEUE_ADDRESS:-coreai-mcu-response}${MESSAGE_QUEUE_SUFFIX}
