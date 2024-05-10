@@ -1,6 +1,10 @@
 storageAccounts:
   - name: 'coreaimcu'
     owner: 'no'
+    blobContainers:
+      - name: 'finalisedresponses'
+        roleAssignments:
+          - roleName: 'BlobDataContributor'
     tables: 
       - name: 'responses'
         roleAssignments:
