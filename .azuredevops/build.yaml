@@ -3,6 +3,10 @@ parameters:
   displayName: "Deploy from Feature Branch"
   type: boolean
   default: false
+- name: deployConfigOnly
+  displayName: "Deploy App Config"
+  type: boolean
+  default: false
 
 pr:
   branches:
@@ -40,6 +44,7 @@ extends:
     projectName: "coreai-mcu-responses"
     serviceName: "coreai-mcu-responses"
     deployFromFeature: ${{ parameters.deployFromFeature }}
+    deployConfigOnly: ${{ parameters.deployConfigOnly }}
     appBuildConfig:
       appFrameworkType: "nodejs"    
       projectPath: "./package.json"
@@ -52,5 +57,3 @@ extends:
       filetype: "yaml"
       variableGroups:
         - coreai-mcu-responses-<environment>
-      variables:
-        - coreai-mcu-responses-APPINSIGHTS-CONNECTIONSTRING

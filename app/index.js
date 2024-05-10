@@ -7,8 +7,12 @@ const { initialiseTables, initialiseContainer } = require('./storage/response-re
 const init = async () => {
   const server = await createServer()
   await server.start()
-  await initialiseTables()
-  await initialiseContainer()
+
+  if (process.env.INIT_STORAGE) {
+    await initialiseTables()
+    await initialiseContainer()
+  }
+  
   console.log('Server running on %s', server.info.uri)
   await messaging.start()
 }

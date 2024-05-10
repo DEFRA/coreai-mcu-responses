@@ -1,3 +1,13 @@
 - key: APPINSIGHTS_CONNECTIONSTRING
   value: "{{servicename}}-APPINSIGHTS-CONNECTIONSTRING"
   type: "keyvault"
+- key: MESSAGE_QUEUE_HOST
+  value: "{{servicename}}-MESSAGE-QUEUE-HOST"
+  type: "keyvault"
+- key: RESPONSE_PROCESSING_QUEUE_ADDRESS
+  value: "coreai-mcu-response"
+- key: EVENTS_TOPIC_ADDRESS
+  value: "coreai-mcu-events"
+- key: AZURE_STORAGE_ACCOUNT
+  value: "{{servicename}}-AZURE-STORAGE-ACCOUNT"
+  type: "keyvault"
