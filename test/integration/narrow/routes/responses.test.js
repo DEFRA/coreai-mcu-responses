@@ -1,6 +1,6 @@
 jest.mock('../../../../app/storage/response-repo')
 
-const { getResponses } = require('../../../../app/storage/response-repo')
+const { getResponses } = require('../../../../app/storage/repos/responses')
 
 describe('Responses test', () => {
   const createServer = require('../../../../app/server')

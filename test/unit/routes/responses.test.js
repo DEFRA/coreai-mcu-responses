@@ -1,7 +1,7 @@
 jest.mock('../../../app/storage/response-repo')
 
 const responses = require('../../../app/routes/responses')
-const { getResponses } = require('../../../app/storage/response-repo')
+const { getResponses } = require('../../../app/storage/repos/responses')
 
 describe('/responses/{docId}', () => {
   beforeEach(() => {
