@@ -28,12 +28,12 @@ services:
       AZURE_STORAGE_ACCOUNT: ${AZURE_STORAGE_ACCOUNT:-devstoreaccount1}
       INIT_STORAGE: "true"
 
-  coreai-mcu-responses-azurite:
-    image: mcr.microsoft.com/azure-storage/azurite
-    ports:
-      - "${CORE_AI_RESPONSES_TABLE_PORT:-10002}:10002"
-    volumes:
-      - azurite_data:/data
+  # coreai-mcu-responses-azurite:
+  #   image: mcr.microsoft.com/azure-storage/azurite
+  #   ports:
+  #     - "${CORE_AI_RESPONSES_TABLE_PORT:-10002}:10002"
+  #   volumes:
+  #     - azurite_data:/data
 
 volumes:
   azurite_data:

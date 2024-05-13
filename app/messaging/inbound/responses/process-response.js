@@ -1,6 +1,6 @@
 const util = require('util')
 const { validateResponseMessage } = require('../responses/response-schema')
-const { addResponse } = require('../../../storage/response-repo')
+const { addResponse } = require('../../../storage/repos/responses')
 const { publishResponseEvent } = require('../../outbound/publish-event')
 
 const processResponse = async (message, receiver) => {
