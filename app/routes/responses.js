@@ -1,6 +1,6 @@
 const Joi = require('joi')
-const { getResponses, saveResponseBlob, updateResponseMetadata, deleteResponses, getFinalisedResponse } = require('../storage/repos/responses')
-const { coveragePathIgnorePatterns } = require('../../jest.config')
+const { getResponses, deleteResponses } = require('../storage/repos/responses')
+const { getFinalisedResponse, saveFinalisedResponse } = require('../storage/repos/finalised-responses')
 
 module.exports = [{
   method: 'GET',
@@ -64,10 +64,10 @@ module.exports = [{
       console.error('Error getting responses:', err)
       throw err
     }
-    
+
     const { response } = responses[0]
 
-    await saveResponseBlob(projectName, documentId, response)
+    await saveFinalisedResponse(projectName, documentId, response)
 
     return h.response().code(201)
   }
@@ -86,7 +86,7 @@ module.exports = [{
     const { projectName, documentId } = request.params
     const { response } = request.payload
 
-    await saveResponseBlob(projectName, documentId, response)
+    await saveFinalisedResponse(projectName, documentId, response)
 
     return h.response().code(200)
   }
