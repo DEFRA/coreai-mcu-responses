@@ -5,9 +5,9 @@
   value: "{{servicename}}-MESSAGE-QUEUE-HOST"
   type: "keyvault"
 - key: RESPONSE_PROCESSING_QUEUE_ADDRESS
-  value: "coreai-mcu-response"
+  value: "crai-mcu-response"
 - key: EVENTS_TOPIC_ADDRESS
-  value: "coreai-mcu-events"
+  value: "crai-mcu-events"
 - key: AZURE_STORAGE_ACCOUNT
   value: "{{servicename}}-AZURE-STORAGE-ACCOUNT"
   type: "keyvault"
