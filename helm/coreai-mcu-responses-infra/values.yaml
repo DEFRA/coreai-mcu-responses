@@ -12,7 +12,6 @@ storageAccounts:
 
 namespaceTopics:
   - name: events
-    owner: 'no'
     roleAssignments:
       - roleName: 'TopicSender'
 
