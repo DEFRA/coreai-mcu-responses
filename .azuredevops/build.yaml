@@ -41,8 +41,7 @@ resources:
 extends:
   template: /pipelines/common-app-build.yaml@DEFRA-ADPPipelineCommon
   parameters:
-    programmeName: "coreai"
-    projectName: "coreai-mcu-responses"
+    teamName: crai-mcu
     serviceName: "coreai-mcu-responses"
     deployFromFeature: ${{ parameters.deployFromFeature }}
     deployConfigOnly: ${{ parameters.deployConfigOnly }}
