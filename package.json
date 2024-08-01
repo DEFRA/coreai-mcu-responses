@@ -1,6 +1,6 @@
 {
   "name": "coreai-mcu-responses",
-  "version": "0.1.22",
+  "version": "0.1.24",
   "description": "",
   "homepage": "github.com?owner=defra&repo=coreai-mcu-responses&organization=defra",
   "main": "app/index.js",

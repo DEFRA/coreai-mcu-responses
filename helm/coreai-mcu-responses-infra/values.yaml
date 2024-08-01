@@ -1,14 +1,12 @@
 storageAccounts:
   - name: 'coreaimcu'
     owner: 'no'
+    roleAssignments:
+      - roleName: 'DataWriter'
     blobContainers:
       - name: 'finalisedresponses'
-        roleAssignments:
-          - roleName: 'BlobDataContributor'
     tables: 
       - name: 'responses'
-        roleAssignments:
-          - roleName: 'TableDataContributor'
 
 namespaceTopics:
   - name: events
