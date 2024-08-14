@@ -8,25 +8,23 @@ const initialiseContainer = async () => {
   await containerClient.createIfNotExists()
 }
 
-const getNextBlobVersion = async (folderName) => {
+const getNextBlobVersion = async (projectName, documentId) => {
   let maxVersion = 0
 
-  for await (const blob of containerClient.listBlobsByHierarchy('/', { prefix: `${folderName}/` })) {
-    const versionMatch = blob.name.match(/_([^_]+)\.[^.]+$/)
+  for await (const blob of containerClient.listBlobsByHierarchy('/', { prefix: `${projectName}/${documentId}/` })) {
+    const name = blob.name.split('/')[2]
 
-    if (versionMatch) {
-      const version = parseInt(versionMatch[1])
+    const version = parseInt(name.split('.')[0])
 
-      maxVersion = Math.max(maxVersion, version)
-    }
+    maxVersion = Math.max(maxVersion, version)
   }
 
   return maxVersion + 1
 }
 
 const getFinalisedResponse = async (projectName, documentId) => {
-  const version = await getNextBlobVersion(projectName) - 1
-  const name = `${projectName}/${documentId}_${version}.txt`
+  const version = await getNextBlobVersion(projectName, documentId) - 1
+  const name = `${projectName}/${documentId}/${version}.txt`
   const client = containerClient.getBlockBlobClient(name)
 
   if (!await client.exists()) {
@@ -48,8 +46,8 @@ const getFinalisedResponse = async (projectName, documentId) => {
 }
 
 const saveFinalisedResponse = async (projectName, documentId, response) => {
-  const version = await getNextBlobVersion(projectName)
-  const name = `${projectName}/${documentId}_${version}.txt`
+  const version = await getNextBlobVersion(projectName, documentId)
+  const name = `${projectName}/${documentId}/${version}.txt`
   const client = containerClient.getBlockBlobClient(name)
 
   try {
